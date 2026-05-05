@@ -1,0 +1,47 @@
+# =========================
+# ENV FILES (VERY IMPORTANT)
+# =========================
+.env
+.env.*
+frontend/.env
+backend/.env
+
+# =========================
+# NODE MODULES
+# =========================
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# =========================
+# BUILD FILES
+# =========================
+dist/
+build/
+frontend/dist/
+frontend/build/
+backend/dist/
+
+# =========================
+# LOG FILES
+# =========================
+*.log
+logs/
+
+# =========================
+# OS FILES
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE FILES
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# TEMP FILES
+# =========================
+tmp/
+temp/
