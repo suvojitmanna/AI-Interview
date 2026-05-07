@@ -1,11 +1,41 @@
-import React from 'react'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUserData } from "./redux/userSlice";
+import PrivacyPolicy from "./pages/Privacy";
+import TermsOfService from "./pages/Terms";
+
+export const ServerUrl = import.meta.env.VITE_BASE_URL;
 
 const App = () => {
-  return (
-    <div className='bg-green-500'><h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1></div>
-  )
-}
+  const dispatch = useDispatch();
 
-export default App
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const result = await axios.get(ServerUrl + "/api/user/current-user", {
+          withCredentials: true,
+        });
+        dispatch(setUserData(result.data));
+      } catch (error) {
+        console.log(error);
+        dispatch(setUserData(null));
+      }
+    };
+    getUser();
+  }, [dispatch]);
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/auth" element={<Auth />} />
+      <Route path="/terms" element={<TermsOfService />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+    </Routes>
+  );
+};
+
+export default App;

@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    image:{
+        type:String,
+        default: "",
+    },
     credits: {
         type: Number,
         default: 100,
