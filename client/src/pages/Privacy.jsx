@@ -1,6 +1,7 @@
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { HiArrowLeft, HiOutlineShieldCheck, HiOutlineLockClosed, HiOutlineDatabase } from "react-icons/hi";
+import { useEffect } from "react";
 
 const PrivacyPolicy = () => {
   const navigate = useNavigate();
@@ -10,6 +11,9 @@ const PrivacyPolicy = () => {
     damping: 30,
     restDelta: 0.001
   });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const sections = [
     { id: "collection", title: "1. Information Collection", icon: <HiOutlineDatabase /> },
@@ -31,7 +35,7 @@ const PrivacyPolicy = () => {
           {/* Left Sidebar - Navigation */}
           <aside className="lg:w-1/4 lg:sticky lg:top-12 h-fit">
             <button 
-              onClick={() => navigate("/auth")}
+              onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-slate-400 hover:text-indigo-600 transition-all mb-10 group font-medium cursor-pointer"
             >
               <HiArrowLeft className="group-hover:-translate-x-1 transition-transform" />

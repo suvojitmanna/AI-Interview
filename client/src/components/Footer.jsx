@@ -1,8 +1,10 @@
 import React from "react";
 import { BsRobot, BsTwitterX, BsGithub, BsLinkedin } from "react-icons/bs";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <footer>
       {/* Background Glow */}
@@ -170,15 +172,21 @@ const Footer = () => {
           <p>@ 2026 InterviewIQ.AI. All rights reserved.</p>
 
           <div className="flex items-center gap-6">
-            <p className="hover:text-green-600 transition cursor-pointer">
+            <p
+              onClick={() => navigate("/terms")}
+              className="hover:text-green-700 transition cursor-pointer"
+            >
               Terms
             </p>
 
-            <p className="hover:text-green-600 transition cursor-pointer">
+            <p
+              onClick={() => navigate("/privacy")}
+              className="hover:text-green-700 transition cursor-pointer"
+            >
               Privacy
             </p>
 
-            <p className="hover:text-green-600 transition cursor-pointer">
+            <p className="hover:text-green-700 transition cursor-pointer">
               Cookies
             </p>
           </div>
