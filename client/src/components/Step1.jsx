@@ -10,6 +10,8 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { ServerUrl } from "../App";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "../redux/userSlice";
 
 const Step1 = ({ onStart }) => {
   const [role, setRole] = useState("");
@@ -23,6 +25,9 @@ const Step1 = ({ onStart }) => {
   const [analysisDone, setAnalysisDone] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [fileError, setFileError] = useState("");
+
+  const { userData } = useSelector((state) => state.user);
+  const dispatch = useDispatch()
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -64,6 +69,29 @@ const Step1 = ({ onStart }) => {
     } catch (error) {
       console.log(error);
       setAnalyzing(false);
+    }
+  };
+
+  const handleStart = async () => {
+    setLoading(true);
+    try {
+      const result = await axios.post(
+        ServerUrl + "/api/interview/generate-questions",
+        { role, experience, mode, resumeText, projects, skills },
+        { withCredentials: true },
+      );
+      console.log(result.data)
+      if(userData){
+        dispatch(setUserData({...userData , credits:result.data.creditsLeft}))
+      }
+      setLoading(false)
+      onStart(result.data)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+    finally{
+      setLoading(false)
     }
   };
 
@@ -266,19 +294,10 @@ const Step1 = ({ onStart }) => {
             )}
 
             <motion.button
-              disabled={!role || !experience || analyzing}
+            onClick={handleStart}
+              disabled={!role || !experience || analyzing || loading}
               whileHover={{ scale: !role || !experience ? 1 : 1.03 }}
               whileTap={{ scale: !role || !experience ? 1 : 0.95 }}
-              onClick={() => {
-                onStart({
-                  role,
-                  experience,
-                  mode,
-                  projects,
-                  skills,
-                  resumeText,
-                });
-              }}
               className="w-full disabled:bg-gray-400 disabled:cursor-not-allowed bg-green-600 hover:bg-green-700 text-white py-3 rounded-full text-lg font-semibold transition duration-300 shadow-md mt-4 cursor-pointer"
             >
               {loading ? "Initializing..." : "Start Interview"}

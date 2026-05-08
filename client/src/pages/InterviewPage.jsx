@@ -23,7 +23,7 @@ const InterviewPage = () => {
           interviewData={interViewData}
           onFinish={(report) => {
             setInterViewData(report);
-            setStep(2);
+            setStep(3);
           }}
         />
       )}
