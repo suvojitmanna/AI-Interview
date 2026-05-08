@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUserData } from "./redux/userSlice";
 import PrivacyPolicy from "./pages/Privacy";
 import TermsOfService from "./pages/Terms";
+import InterviewPage from "./pages/InterviewPage";
 
 export const ServerUrl = import.meta.env.VITE_BASE_URL;
 
@@ -34,6 +35,7 @@ const App = () => {
       <Route path="/auth" element={<Auth />} />
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/interview" element={<InterviewPage />} />
     </Routes>
   );
 };

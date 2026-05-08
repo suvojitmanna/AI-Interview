@@ -155,21 +155,21 @@ const Home = () => {
               >
                 <div>
                   <span className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center justify-center">
-                    <CountUp end={100} duration={2} suffix="K+" />
+                    <CountUp end={100} duration={4} suffix="K+" />
                   </span>
                   <p className="mt-1 text-gray-600">Interviews Completed</p>
                 </div>
 
                 <div>
                   <span className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center justify-center">
-                    <CountUp end={95} duration={2} suffix="%" />
+                    <CountUp end={95} duration={4} suffix="%" />
                   </span>
                   <p className="mt-1 text-gray-600">Accuracy Feedback</p>
                 </div>
 
                 <div className="flex flex-col items-center text-center">
                   <span className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center justify-center">
-                    <CountUp end={24} duration={2} suffix="/7" />
+                    <CountUp end={24} duration={4} suffix="/7" />
                   </span>
                   <p className="mt-1 text-gray-600">AI Availability</p>
                 </div>
