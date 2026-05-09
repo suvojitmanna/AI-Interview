@@ -75,7 +75,7 @@ const InterviewHistory = () => {
 
   // Rating Helper: Logic to render stars based on 0-10 score
   const renderStars = (score) => {
-    const starValue = score / 2; 
+    const starValue = score / 2;
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= starValue) {
@@ -87,6 +87,23 @@ const InterviewHistory = () => {
       }
     }
     return stars;
+  };
+
+  const deleteInterview = async (id) => {
+    try {
+      const result = await axios.delete(
+        `${ServerUrl}/api/interview/delete-interview/${id}`,
+        {
+          withCredentials: true,
+        },
+      );
+
+      console.log(result.data);
+
+      setInterviews((prev) => prev.filter((item) => item._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const completedInterviews = interviews.filter(
@@ -423,6 +440,21 @@ const InterviewHistory = () => {
                             )}
                           </div>
                         </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation(); // Stops the card navigation
+                            if (
+                              window.confirm(
+                                "Are you sure you want to delete this interview record?",
+                              )
+                            ) {
+                              deleteInterview(item.id || item._id);
+                            }
+                          }}
+                          className="absolute top-0 right-0 px-4 py-2 rounded-bl-2xl rounded-tr-[28px] bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 text-[10px] font-extrabold uppercase tracking-widest shadow-sm z-10"
+                        >
+                          Delete
+                        </button>
 
                         {/* Role */}
                         <motion.h2

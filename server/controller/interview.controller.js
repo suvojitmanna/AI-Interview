@@ -398,3 +398,31 @@ export const getInterviewReport = async (req, res) => {
         return res.status(500).json({ message: `failed to find currentUser Interview report ${error}` })
     }
 }
+
+export const deleteInterview = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const interview = await Interview.findById(id);
+
+        if (!interview) {
+            return res.status(404).json({
+                message: "Interview not found",
+            });
+        }
+        if (interview.userId.toString() !== req.userId) {
+            return res.status(403).json({
+                message: "Unauthorized access",
+            });
+        }
+        await Interview.findByIdAndDelete(id);
+
+        return res.status(200).json({
+            success: true,
+            message: "Interview deleted successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: `Failed to delete interview ${error}`,
+        });
+    }
+};

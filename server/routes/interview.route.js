@@ -1,6 +1,6 @@
 import express from "express"
 import isAuth from "../middleware/isAuth.js"
-import { analyzeResume, finishInterview, generateQuestion, getInterviewReport, getMyInterview, submitAnswer } from "../controller/interview.controller.js"
+import { analyzeResume, deleteInterview, finishInterview, generateQuestion, getInterviewReport, getMyInterview, submitAnswer } from "../controller/interview.controller.js"
 import { upload } from "../middleware/multer.js"
 
 const interviewRoute = express.Router()
@@ -12,7 +12,7 @@ interviewRoute.post("/finish", isAuth, finishInterview)
 
 interviewRoute.get("/get-interview", isAuth, getMyInterview)
 interviewRoute.get("/report/:id", isAuth, getInterviewReport)
-
+interviewRoute.delete("/delete-interview/:id",isAuth,deleteInterview);
 
 
 export default interviewRoute
