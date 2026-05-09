@@ -21,13 +21,6 @@ import Footer from "../components/Footer";
 
 const CountUp = CountUpModule.default || CountUpModule;
 const Home = () => {
-  console.log({
-    Navbar: typeof Navbar,
-    AuthModel: typeof AuthModel,
-    motion: typeof motion,
-    CountUp: typeof CountUp,
-    HiSparkles: typeof HiSparkles,
-  });
 
   const navigate = useNavigate();
   const [showAuth, setShowAuth] = useState(false);

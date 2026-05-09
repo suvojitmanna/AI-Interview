@@ -9,6 +9,9 @@ import { setUserData } from "./redux/userSlice";
 import PrivacyPolicy from "./pages/Privacy";
 import TermsOfService from "./pages/Terms";
 import InterviewPage from "./pages/InterviewPage";
+import InterviewHistory from "./pages/InterviewHistory";
+import Pricing from "./pages/Pricing";
+import InterviewReport from "./pages/InterviewReport";
 
 export const ServerUrl = import.meta.env.VITE_BASE_URL;
 
@@ -36,6 +39,9 @@ const App = () => {
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/interview" element={<InterviewPage />} />
+      <Route path="/history" element={<InterviewHistory />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/report/:id" element={<InterviewReport />} />
     </Routes>
   );
 };
