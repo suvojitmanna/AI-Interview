@@ -27,7 +27,7 @@ const Step1 = ({ onStart }) => {
   const [fileError, setFileError] = useState("");
 
   const { userData } = useSelector((state) => state.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -80,18 +80,19 @@ const Step1 = ({ onStart }) => {
         { role, experience, mode, resumeText, projects, skills },
         { withCredentials: true },
       );
-      console.log(result.data)
-      if(userData){
-        dispatch(setUserData({...userData , credits:result.data.creditsLeft}))
+      console.log(result.data);
+      if (userData) {
+        dispatch(
+          setUserData({ ...userData, credits: result.data.creditsLeft }),
+        );
       }
-      setLoading(false)
-      onStart(result.data)
+      setLoading(false);
+      onStart(result.data);
     } catch (error) {
-      console.log(error)
-      setLoading(false)
-    }
-    finally{
-      setLoading(false)
+      console.log(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -103,6 +104,7 @@ const Step1 = ({ onStart }) => {
       className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 px-4 "
     >
       <div className="w-full max-w-6xl bg-white rounded-3xl shadow-2xl grid md:grid-cols-2 overflow-hidden">
+        {/* left Side */}
         <motion.div
           initial={{ x: -80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -145,7 +147,7 @@ const Step1 = ({ onStart }) => {
             ))}
           </div>
         </motion.div>
-
+        {/* right side */}
         <motion.div
           initial={{ x: 80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -294,7 +296,7 @@ const Step1 = ({ onStart }) => {
             )}
 
             <motion.button
-            onClick={handleStart}
+              onClick={handleStart}
               disabled={!role || !experience || analyzing || loading}
               whileHover={{ scale: !role || !experience ? 1 : 1.03 }}
               whileTap={{ scale: !role || !experience ? 1 : 0.95 }}

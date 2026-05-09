@@ -42,7 +42,7 @@ const Navbar = () => {
     visible: { opacity: 1, y: 0, scale: 1 },
     exit: { opacity: 0, y: 8, scale: 0.95 },
   };
-
+  console.log(userData);
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] px-4 pt-6 flex justify-center">
       <motion.div
@@ -139,8 +139,10 @@ const Navbar = () => {
               {userData ? (
                 userData.image ? (
                   <img
-                    src={userData.image}
+                    src={userData?.image}
                     alt="user"
+                    referrerPolicy="no-referrer"
+                    crossOrigin="anonymous"
                     className="w-full h-full object-cover"
                   />
                 ) : (
