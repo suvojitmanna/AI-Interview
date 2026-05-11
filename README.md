@@ -1,159 +1,320 @@
-# 🚀 AI Interview Platform
+# 🚀 AI Interview Platform (MERN + AI + Razorpay)
 
-<div align="center">
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:10B981,100:6366F1&height=220&section=header&text=AI%20Interview%20Platform&fontSize=42&fontColor=ffffff&animation=fadeIn&desc=Smart%20AI%20Powered%20Interview%20Preparation&descAlignY=75" />
+</p>
 
-![AI Interview Banner](https://img.shields.io/badge/AI-Interview_Platform-10b981?style=for-the-badge)
-
-### 🎯 Modern AI Powered Interview Preparation Platform
-
-Practice real-world interviews with AI voice interaction, instant feedback, analytics, and smart performance tracking.
-
-</div>
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?color=00FFB3&size=26&center=true&vCenter=true&width=900&lines=AI+Powered+Interview+Preparation;Real-time+Voice+Interview+System;MERN+Stack+Project;Modern+Premium+UI+Design;AI+Feedback+and+Analytics;Secure+Razorpay+Payment+Integration" />
+</p>
 
 ---
 
-# ✨ Features
+# 🏆 Badges
 
-## 🤖 AI Interview System
+<p align="center">
 
-- Real-time AI Interview Questions
-- Voice Recognition Support
-- AI Generated Feedback
-- Smart Performance Analysis
+<img src="https://img.shields.io/badge/MERN-Stack-4CAF50?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/AI-Powered-black?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/Razorpay-Payment-blue?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/Status-Production-success?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/Responsive-UI-purple?style=for-the-badge"/>
+
+</p>
+
+---
+
+# 🌍 Live Demo
+
+## 🚀 Live App
+
+👉 https://your-ai-interview-app.vercel.app
+
+---
+
+## 💻 GitHub Repository
+
+👉 https://github.com/suvojitmanna/AI-Interview
+
+---
+
+# 🧠 Project Overview
+
+An advanced AI-powered interview preparation platform built using the MERN Stack, featuring AI-generated questions, real-time voice interviews, analytics, secure payments, and modern premium UI/UX.
+
+---
+
+# ✨ Core Highlights
+
+⚡ AI Generated Interview Questions  
+🎤 Real-time Voice Recognition  
+📊 Smart Performance Analytics  
+💬 AI Feedback System  
+🔐 Secure JWT Authentication  
+💳 Razorpay Payment Integration  
+📱 Fully Responsive Premium UI  
+🚀 Smooth Framer Motion Animations  
+
+---
+
+# 🧱 MERN Stack
+
+<p align="center">
+
+<img src="https://skillicons.dev/icons?i=mongodb,express,react,nodejs" />
+
+</p>
+
+---
+
+# 🧠 System Design (High-Level)
+
+```mermaid
+flowchart LR
+
+    U[User] --> F[React Frontend]
+
+    F -->|REST API| B[Express Backend]
+
+    B --> DB[(MongoDB)]
+
+    B --> AI[AI Processing Engine]
+
+    B --> RP[Razorpay API]
+
+    AI --> F
+
+    RP --> F
+```
+
+---
+
+# ⚙️ AI Interview Flow
+
+```mermaid
+sequenceDiagram
+
+    participant User
+    participant Frontend
+    participant Backend
+    participant AI
+    participant DB
+
+    User->>Frontend: Start Interview
+
+    Frontend->>Backend: Request Questions
+
+    Backend->>AI: Generate Questions
+
+    AI-->>Backend: AI Questions
+
+    Backend->>Frontend: Send Questions
+
+    User->>Frontend: Submit Answer
+
+    Frontend->>Backend: Answer Data
+
+    Backend->>AI: Analyze Answer
+
+    AI-->>Backend: Feedback + Score
+
+    Backend->>DB: Save Result
+
+    Backend-->>Frontend: Final Report
+```
+
+---
+
+# 🔥 Features
+
+# 🤖 AI Interview System
+
+- AI Generated Questions
 - Technical + HR Interviews
-- Interview History Tracking
-- Score Based Evaluation
+- Voice Recognition Support
+- AI Feedback & Suggestions
+- Live Interview Experience
+- Smart Scoring System
 
 ---
 
-## 💳 Premium Payment System
+# 📊 Analytics Dashboard
 
-- Razorpay Payment Integration
-- Secure Online Payments
-- Credits Based Interview System
-- Multiple Subscription Plans
-- Payment Verification System
-
----
-
-## 🎨 Modern UI/UX
-
-- Responsive Premium Design
-- Glassmorphism UI
-- Smooth Framer Motion Animations
-- Dark/Light Premium Components
-- Mobile Friendly Layout
-- Interactive Dashboard
+- Performance Tracking
+- Skill Analysis
+- Score Graphs
+- Interview History
+- Progress Monitoring
 
 ---
 
-# 🛠️ Tech Stack
+# 💳 Payment System
+
+- Razorpay Integration
+- Secure Online Payment
+- Credits Based Plans
+- Premium Subscription System
+
+---
+
+# 🎨 UI/UX
+
+- Modern Premium UI
+- Glassmorphism Effects
+- Responsive Design
+- Smooth Animations
+- Interactive Components
+
+---
+
+# 🖼 Demo Preview
+
+<p align="center">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExplaceholder/giphy.gif" width="850"/>
+
+</p>
+
+---
+
+# 📊 GitHub Insights
+
+<p align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=suvojitmanna&show_icons=true&theme=tokyonight&hide_border=true"/>
+
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=suvojitmanna&theme=tokyonight&hide_border=true"/>
+
+</p>
+
+---
+
+# 📈 Contribution Activity
+
+<p align="center">
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=suvojitmanna&theme=react-dark&hide_border=true&area=true"/>
+
+</p>
+
+---
+
+# 🏆 Achievements
+
+<p align="center">
+
+<img src="https://github-profile-trophy.vercel.app/?username=suvojitmanna&theme=onedark&no-frame=true&margin-w=10"/>
+
+</p>
+
+---
+
+# 🧩 Project Structure
+
+```bash
+client/
+│
+├── components/
+├── pages/
+├── redux/
+├── assets/
+├── hooks/
+└── App.jsx
+
+server/
+│
+├── controllers/
+├── routes/
+├── middleware/
+├── models/
+├── config/
+├── utils/
+└── server.js
+```
+
+---
+
+# ⚙️ Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/suvojitmanna/AI-Interview.git
+```
+
+---
+
+# 📦 Install Dependencies
 
 ## Frontend
 
-- React.js
-- Tailwind CSS
-- Framer Motion
-- Axios
-- React Router DOM
-- React Icons
-- React Hot Toast
+```bash
+cd client
+npm install
+```
 
 ---
 
 ## Backend
 
-- Node.js
-- Express.js
-- MongoDB
-- JWT Authentication
-- Razorpay API
-
----
-
-# 📂 Project Structure
-
-```bash
-AI-Interview/
-│
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── redux/
-│   │   ├── assets/
-│   │   └── App.jsx
-│   │
-│   └── package.json
-│
-├── server/
-│   ├── controllers/
-│   ├── routes/
-│   ├── middleware/
-│   ├── models/
-│   ├── config/
-│   └── server.js
-│
-└── README.md
-```
-
----
-
-# ⚡ Installation
-
-## 1️⃣ Clone Repository
-
-```bash
-git clone https://github.com/yourusername/AI-Interview.git
-```
-
----
-
-## 2️⃣ Frontend Setup
-
-```bash
-cd client
-npm install
-npm run dev
-```
-
----
-
-## 3️⃣ Backend Setup
-
 ```bash
 cd server
 npm install
+```
+
+---
+
+# ▶️ Run Application
+
+## Start Backend
+
+```bash
 npm run server
+```
+
+---
+
+## Start Frontend
+
+```bash
+npm run dev
 ```
 
 ---
 
 # 🔐 Environment Variables
 
-## Frontend `.env`
+# Frontend `.env`
 
 ```env
-VITE_RAZORPAY_KEY=your_razorpay_key
 VITE_SERVER_URL=http://localhost:8000
+
+VITE_RAZORPAY_KEY=your_razorpay_key
 ```
 
 ---
 
-## Backend `.env`
+# Backend `.env`
 
 ```env
 PORT=8000
+
 MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret_key
+
+JWT_SECRET=your_secret
 
 RAZORPAY_KEY_ID=your_key
+
 RAZORPAY_KEY_SECRET=your_secret
 ```
 
 ---
 
-# 💳 Razorpay Integration
+# 💳 Razorpay Setup
 
 ## Install Razorpay
 
@@ -173,60 +334,16 @@ Inside `index.html`
 
 ---
 
-# 🧠 AI Interview Flow
+# 🔗 API Endpoints
 
-```text
-User Login
-   ↓
-Choose Interview
-   ↓
-AI Generates Questions
-   ↓
-Voice/Text Answer
-   ↓
-AI Analysis
-   ↓
-Performance Report
-```
-
----
-
-# 📸 Screenshots
-
-## 🏠 Home Page
-
-- Premium Hero Section
-- Animated UI
-- AI Branding
-
----
-
-## 💳 Pricing Page
-
-- Glassmorphism Cards
-- Gradient Buttons
-- Razorpay Checkout
-
----
-
-## 🎤 Interview Page
-
-- AI Voice Recognition
-- Timer System
-- Live Questions
-
----
-
-# 🔥 Premium Features
-
-✅ Voice AI Interview  
-✅ Resume Based Questions  
-✅ Smart Analytics  
-✅ AI Feedback System  
-✅ Secure Authentication  
-✅ Modern Dashboard  
-✅ Mobile Responsive  
-✅ Payment Integration  
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/auth/register | Register User |
+| POST | /api/auth/login | Login User |
+| GET | /api/interview | Fetch Interviews |
+| POST | /api/interview/start | Start Interview |
+| POST | /api/payment/order | Create Payment Order |
+| POST | /api/payment/verify | Verify Payment |
 
 ---
 
@@ -240,14 +357,14 @@ npm install axios react-router-dom react-hot-toast framer-motion react-icons
 
 # 🚀 Deployment
 
-## Frontend Deploy
+# Frontend Deploy
 
 - Vercel
 - Netlify
 
 ---
 
-## Backend Deploy
+# Backend Deploy
 
 - Render
 - Railway
@@ -257,33 +374,34 @@ npm install axios react-router-dom react-hot-toast framer-motion react-icons
 
 # 🔒 Authentication
 
-- JWT Token Authentication
-- Secure Cookies
+- JWT Authentication
 - Protected Routes
+- Secure Cookies
 - Google Authentication
 
 ---
 
-# 🎯 Future Improvements
+# 🎯 Future Enhancements
 
-- AI Video Interview
-- Resume Upload
-- Multi Language Support
-- AI Avatar Interviewer
-- Leaderboard System
-- Community Challenges
+🤖 AI Video Interview  
+📄 Resume Upload Analysis  
+🌐 Multi Language Support  
+🎙 AI Voice Assistant  
+📈 Advanced Analytics  
+🏆 Leaderboard System  
+📱 Mobile Application  
 
 ---
 
-# 👨‍💻 Developer
+# 🤝 Contributing
 
-## Suvojit Manna
+```bash
+git checkout -b feature-name
 
-### Full Stack MERN Developer
+git commit -m "Add new feature"
 
-- React Developer
-- Node.js Backend Developer
-- UI/UX Designer
+git push origin feature-name
+```
 
 ---
 
@@ -291,20 +409,44 @@ npm install axios react-router-dom react-hot-toast framer-motion react-icons
 
 If you like this project:
 
-🌟 Star the repository  
-🍴 Fork the project  
-📢 Share with friends  
+⭐ Star the Repository  
+🍴 Fork the Project  
+📢 Share with Friends  
 
 ---
 
-# 📄 License
+# 👨‍💻 Author
 
-This project is licensed under the MIT License.
+# Suvojit Manna
+
+### Full Stack MERN Developer
+
+💻 React Developer  
+⚙️ Backend Developer  
+🎨 UI/UX Designer  
 
 ---
 
-<div align="center">
+# 📜 License
 
-### ❤️ Built With React + Node + AI
+MIT License
 
-</div>
+---
+
+# 👁 Visitors
+
+<p align="center">
+
+<img src="https://komarev.com/ghpvc/?username=suvojitmanna&label=Profile%20Views&color=brightgreen&style=for-the-badge"/>
+
+</p>
+
+---
+
+# 🎯 Footer
+
+<p align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6366F1,100:10B981&height=140&section=footer"/>
+
+</p>
