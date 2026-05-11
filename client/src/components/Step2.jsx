@@ -84,9 +84,36 @@ const Step2 = ({ interviewData, onFinish }) => {
     recognition.interimResults = false;
 
     recognition.onresult = (event) => {
-      const transcript = event.results[event.results.length - 1][0].transcript;
+      let finalTranscript = "";
 
-      setAnswer((prev) => prev + " " + transcript);
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        finalTranscript += event.results[i][0].transcript;
+      }
+
+      setAnswer((prev) => prev + " " + finalTranscript);
+    };
+
+    // when mic stops automatically
+    recognition.onend = () => {
+      console.log("Speech recognition ended");
+
+      // restart mic automatically
+      if (isMicOn && !isAIPlaying) {
+        try {
+          recognition.start();
+        } catch (error) {
+          console.log("Restart error", error);
+        }
+      }
+    };
+
+    // error handling
+    recognition.onerror = (event) => {
+      console.log("Speech recognition error:", event.error);
+
+      if (event.error === "not-allowed") {
+        alert("Please allow microphone permission");
+      }
     };
 
     recognitionRef.current = recognition;

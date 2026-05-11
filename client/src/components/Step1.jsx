@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
+  FaArrowLeft,
   FaBriefcase,
   FaChartLine,
   FaFileUpload,
@@ -12,6 +13,7 @@ import axios from "axios";
 import { ServerUrl } from "../App";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Step1 = ({ onStart }) => {
   const [role, setRole] = useState("");
@@ -25,6 +27,7 @@ const Step1 = ({ onStart }) => {
   const [analysisDone, setAnalysisDone] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [fileError, setFileError] = useState("");
+  const navigate = useNavigate();
 
   const { userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -111,6 +114,23 @@ const Step1 = ({ onStart }) => {
           transition={{ duration: 0.7 }}
           className="relative bg-gradient-to-br from-green-50 to-green-100 p-12 flex flex-col justify-center "
         >
+          <motion.button
+            onClick={() => navigate("/")}
+            className="absolute top-6 left-8 text-gray-500 hover:text-green-600 transition-colors cursor-pointer"
+            whileHover="hover"
+            initial="initial"
+          >
+            <motion.div
+              variants={{
+                initial: { x: 0 },
+                hover: { x: -5 },
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              className="flex items-center gap-2"
+            >
+              <FaArrowLeft size={20} />
+            </motion.div>
+          </motion.button>
           <h2 className="text-4xl font-bold text-gray-800 mb-6 ">
             Start Your AI Interview
           </h2>

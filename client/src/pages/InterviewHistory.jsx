@@ -62,7 +62,11 @@ const InterviewHistory = () => {
             withCredentials: true,
           },
         );
-        setInterviews(result.data);
+        const sortedData = result.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        );
+
+        setInterviews(sortedData);
       } catch (error) {
         console.error("Error fetching interviews:", error);
       } finally {
@@ -175,7 +179,7 @@ const InterviewHistory = () => {
             <div className="flex items-center gap-5">
               <button
                 onClick={() => navigate("/")}
-                className="group p-4 rounded-2xl bg-white border border-gray-200 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all duration-300 shadow-sm"
+                className="group p-4 rounded-2xl bg-white border border-gray-200 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all duration-300 shadow-sm cursor-pointer"
               >
                 <FaArrowLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
               </button>
