@@ -111,18 +111,102 @@ const Navbar = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="absolute right-0 mt-4 w-72 bg-white rounded-[2rem] shadow-2xl border border-slate-100 p-6 z-50 origin-top-right"
+                  className="group absolute right-0 top-full mt-4 w-[360px] rounded-[32px] border border-white/30  bg-white/80 backdrop-blur-2xl shadow-[0_25px_80px_-20px_rgba(15,23,42,0.22)] hover:shadow- transition-all duration-500 p-7 z-50 origin-top-right overflow-hidden "
                 >
-                  <p className="text-sm font-medium text-slate-500 mb-4 leading-relaxed">
-                    Ready to ace your next session? Your credits allow for
-                    unlimited AI practice.
-                  </p>
-                  <button
-                    onClick={() => navigate("/pricing")}
-                    className="w-full bg-slate-900 hover:bg-black text-white py-3 rounded-2xl font-semibold shadow-xl shadow-indigo-100 transition-all cursor-pointer"
-                  >
-                    Get More Credits
-                  </button>
+                  {/* Border Glow */}
+                  <div className="absolute inset-0 rounded-[32px] ring-1 ring-inset ring-white/40 pointer-events-none" />
+
+                  {/* Ambient Glows */}
+                  <div className="absolute -top-28 -right-20 w-56 h-56 bg-indigo-200/40 rounded-full blur-3xl" />
+                  <div className="absolute -bottom-28 -left-20 w-56 h-56 bg-fuchsia-200/30 rounded-full blur-3xl" />
+                  <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500" />
+
+                  <div className="relative">
+                    <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/75 border border-slate-200/80 shadow-sm">
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100">
+                        <BsCoin className="text-emerald-500" size={16} />
+                      </div>
+
+                      <div className="flex flex-col leading-none">
+                        <span className="text-[10px] uppercase tracking-[0.22em] font-semibold text-slate-400">
+                          Credits
+                        </span>
+
+                        <span className="text-sm font-bold text-slate-800">
+                          {userData?.credits || 0} remaining
+                        </span>
+                      </div>
+
+                      <div className="ml-1 w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    </div>
+                    <div className="mt-2">
+                      <h3 className="text-[24px] leading-[1.15] tracking-tight font-bold text-slate-900">
+                        Continue your{" "}
+                        <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
+                          AI interview preparation
+                        </span>
+                      </h3>
+                      <p className="mt-4 text-[15px] leading-7 text-slate-600">
+                        Unlock more{" "}
+                        <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 bg-clip-text text-transparent font-bold">
+                          {" "}
+                          sessions, deeper feedback, and uninterrupted{" "}
+                        </span>
+                        practice whenever you need it.
+                      </p>
+                    </div>
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-medium text-slate-500">
+                          Remaining credits
+                        </span>
+                        <span className="text-xs font-semibold text-slate-700">
+                          {userData?.credits || 0}/100
+                        </span>
+                      </div>
+
+                      <div className="h-[6px] rounded-full bg-slate-200/70 overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{
+                            width: `${Math.min(userData?.credits || 0, 100)}%`,
+                          }}
+                          transition={{
+                            duration: 0.9,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          className={`h-full rounded-full transition-all duration-100 
+                            ${
+                              (userData?.credits || 0) < 100
+                                ? "bg-gradient-to-r from-rose-500 via-orange-400 to-amber-400"
+                                : "bg-gradient-to-r from-emerald-500 via-indigo-500 to-violet-500"
+                            } 
+                              `}
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => navigate("/pricing")}
+                      className="group/button relative mt-5 w-full overflow-hidden bg-slate-900 py-4 font-semibold text-white transition-all duration-300 hover:scale-[1.015] hover:-translate-y-[1px] hover:shadow-[0_20px_45px_rgba(79,70,229,0.35)] active:scale-[0.985] rounded-3xl cursor-pointer"
+                    >
+                      <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/button:opacity-100 bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600" />
+
+                      {/* Shine */}
+                      <div className="absolute inset-0 -translate-x-full group-hover/button:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        Get More Credits
+                      </span>
+                    </button>
+
+                    {/* Secondary Action */}
+                    <button
+                      onClick={() => setShowCreditPopup(false)}
+                      className="mt-4 w-full text-sm text-slate-400 hover:text-slate-600 transition-colors cursor-pointer underline font-bold "
+                    >
+                      Maybe later
+                    </button>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -131,8 +215,8 @@ const Navbar = () => {
           {/* User Profile */}
           <div ref={userRef} className="relative">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02, y: -1 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => {
                 if (!userData) {
                   setShowAuth(true);
@@ -141,7 +225,7 @@ const Navbar = () => {
                 setShowUserPopup(!showUserPopup);
                 setShowCreditPopup(false);
               }}
-              className="w-11 h-11 bg-slate-900 rounded-2xl flex items-center justify-center text-white overflow-hidden border-2 border-white shadow-md cursor-pointer"
+              className="group relative w-11 h-11 bg-slate-900 rounded-2xl flex items-center justify-center text-white overflow-hidden border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] cursor-pointer transition-shadow hover:shadow-indigo-500/20"
             >
               {userData ? (
                 userData.image ? (
@@ -150,10 +234,10 @@ const Navbar = () => {
                     alt="user"
                     referrerPolicy="no-referrer"
                     crossOrigin="anonymous"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 ) : (
-                  <span className="font-bold tracking-tighter">
+                  <span className="font-bold text-sm tracking-tight">
                     {userData.name
                       .split(" ")
                       .map((n) => n[0])
@@ -163,7 +247,10 @@ const Navbar = () => {
                   </span>
                 )
               ) : (
-                <FaUserAstronaut size={20} />
+                <FaUserAstronaut
+                  size={18}
+                  className="text-slate-400 group-hover:text-white transition-colors"
+                />
               )}
             </motion.button>
 
@@ -174,58 +261,65 @@ const Navbar = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="absolute right-0 mt-4 w-60 bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden z-50 origin-top-right"
+                  className="absolute right-0 mt-3 w-64 bg-white/80 backdrop-blur-2xl rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-200/60 overflow-hidden z-50 origin-top-right"
                 >
-                  <div className="px-6 py-5 border-b border-white/20 bg-gradient-to-br from-slate-50/80 to-white/40 backdrop-blur-xl">
-                    {/* Label */}
-                    <p className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em] mb-2">
-                      Account
+                  {/* Header Section */}
+                  <div className="px-5 py-4 bg-gradient-to-b from-slate-50/50 to-transparent">
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mb-3">
+                      Account Workspace
                     </p>
 
-                    {/* User Info */}
-                    <div className="flex items-center gap-4">
-                      {/* Avatar */}
-                      <div className="w-12 h-12 rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold shadow-lg">
-                        {userData?.image ? (
-                          <img
-                            src={userData.image}
-                            alt="user"
-                            referrerPolicy="no-referrer"
-                            crossOrigin="anonymous"
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          userData?.name?.charAt(0).toUpperCase()
-                        )}
+                    <div className="flex items-center gap-3">
+                      <div className="relative group">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-fuchsia-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                        <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-slate-900 flex items-center justify-center text-white text-xs font-bold ring-2 ring-white">
+                          {userData?.image ? (
+                            <img
+                              src={userData.image}
+                              alt="avatar"
+                              referrerPolicy="no-referrer"
+                              crossOrigin="anon"
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            userData?.name?.charAt(0).toUpperCase()
+                          )}
+                        </div>
                       </div>
 
-                      {/* Name + Email */}
-                      <div className="flex-1 min-w-0">
-                        <p className="font-bold text-slate-800 truncate text-[15px]">
+                      <div className="flex flex-col min-w-0">
+                        <span className="font-semibold text-slate-900 truncate text-sm leading-none mb-1">
                           {userData?.name}
-                        </p>
-
-                        <p className="text-sm text-slate-500 truncate">
+                        </span>
+                        <span className="text-xs text-slate-500 truncate leading-none">
                           {userData?.email}
-                        </p>
+                        </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-2">
+                  {/* Menu Actions */}
+                  <div className="p-2 space-y-1">
                     <button
                       onClick={() => navigate("/history")}
-                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-indigo-600 font-medium transition-colors cursor-pointer"
+                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100/80 text-slate-600 hover:text-indigo-600 font-medium transition-all duration-200 group cursor-pointer"
                     >
-                      <FaHistory size={16} />
-                      History
+                      <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center group-hover:bg-white group-hover:shadow-sm transition-all">
+                        <FaHistory size={14} />
+                      </div>
+                      <span className="text-[13px]">Activity History</span>
                     </button>
+
+                    <div className="h-px bg-slate-100 my-1 mx-2" />
+
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-50 text-red-500 font-medium transition-colors cursor-pointer"
+                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 text-red-500 font-medium transition-all duration-200 group cursor-pointer"
                     >
-                      <HiOutlineLogout size={18} />
-                      Logout
+                      <div className="w-8 h-8 rounded-lg bg-red-50/50 flex items-center justify-center group-hover:bg-white group-hover:shadow-sm transition-all">
+                        <HiOutlineLogout size={16} />
+                      </div>
+                      <span className="text-[13px]">Sign Out</span>
                     </button>
                   </div>
                 </motion.div>
