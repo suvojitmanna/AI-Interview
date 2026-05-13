@@ -288,7 +288,7 @@ const InterviewHistory = () => {
               </p>
 
               <button
-                onClick={() => navigate("/start")}
+                onClick={() => navigate("/interview")}
                 className="mt-8 px-8 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition-all duration-300 shadow-lg hover:shadow-emerald-300 hover:scale-105"
               >
                 Start Interview
