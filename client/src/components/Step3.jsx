@@ -22,7 +22,8 @@ const Step3 = ({ report }) => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
       <div className="flex flex-col items-center gap-4">
         <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-300 border-t-slate-700"></div>
-        <p className="text-lg font-medium text-slate-600 tracking-wide animate-spin">
+
+        <p className="text-lg font-medium text-slate-600 tracking-wide animate-pulse">
           Loading Report...
         </p>
       </div>
