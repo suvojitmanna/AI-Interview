@@ -18,23 +18,25 @@ import autoTable from "jspdf-autotable";
 const Step3 = ({ report }) => {
   const navigate = useNavigate();
   if (!report) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100">
-        <div className="flex flex-col items-center gap-5 rounded-2xl bg-white/70 backdrop-blur-md px-8 py-10 shadow-xl border border-slate-200">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-500"></div>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100">
+  <div className="flex flex-col items-center gap-5 rounded-2xl bg-white/70 backdrop-blur-md px-8 py-10 shadow-xl border border-slate-200">
+    
+    <div className="h-12 w-12 animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-500"></div>
 
-          <div className="text-center">
-            <p className="text-lg font-semibold text-slate-700 animate-pulse">
-              Loading Report...
-            </p>
-            <p className="text-sm text-slate-500 mt-1">
-              Please wait while we prepare your data
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+    <div className="text-center">
+      <p className="text-lg font-semibold text-slate-700 animate-pulse">
+        Loading Report...
+      </p>
+      <p className="text-sm text-slate-500 mt-1">
+        Please wait while we prepare your data
+      </p>
+    </div>
+
+  </div>
+</div>
+  );
+}
   const {
     finalScore = 0,
     confidence = 0,
