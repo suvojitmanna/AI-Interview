@@ -23,7 +23,7 @@ const Step3 = ({ report }) => {
       <div className="flex flex-col items-center gap-4">
         <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-300 border-t-slate-700"></div>
 
-        <p className="text-lg font-medium text-slate-600 tracking-wide animate-pulse">
+        <p className="text-lg font-medium text-emerald-500 tracking-wide animate-spin">
           Loading Report...
         </p>
       </div>
