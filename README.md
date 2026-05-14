@@ -32,7 +32,7 @@
 
 ## 🚀 Live App
 
-👉 https://your-ai-interview-app.vercel.app
+👉 https://ai-interview-two-sigma.vercel.app
 
 ---
 
