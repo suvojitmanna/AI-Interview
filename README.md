@@ -174,8 +174,7 @@ sequenceDiagram
 # 🖼 Demo Preview
 
 <p align="center">
-  <img src="<img width="1742" height="788" alt="Screenshot 2026-05-09 235327" src="https://github.com/user-attachments/assets/9d651cf0-3b60-418e-8aea-1dd52ec042d7" />
-" width="100%" />
+  <img width="1742" height="788" alt="Screenshot 2026-05-09 235327" src="https://github.com/user-attachments/assets/9d651cf0-3b60-418e-8aea-1dd52ec042d7" />
 </p>
 
 ---
