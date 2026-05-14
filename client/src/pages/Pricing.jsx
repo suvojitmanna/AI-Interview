@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  FaArrowLeft,
-  FaCheckCircle,
-  FaCrown,
-  FaBolt,
-} from "react-icons/fa";
+import { FaArrowLeft, FaCheckCircle, FaCrown, FaBolt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
@@ -24,8 +19,7 @@ const Pricing = () => {
       icon: <FaBolt />,
       price: "₹0",
       credits: 100,
-      description:
-        "Perfect for beginners starting interview preparation.",
+      description: "Perfect for beginners starting interview preparation.",
       features: [
         "100 AI Interview Credits",
         "Basic Performance Report",
@@ -62,8 +56,7 @@ const Pricing = () => {
       price: "₹500",
       credits: 650,
       badge: "POPULAR",
-      description:
-        "Advanced AI interview preparation for serious candidates.",
+      description: "Advanced AI interview preparation for serious candidates.",
       features: [
         "650 AI Interview Credits",
         "Advanced AI Feedback",
@@ -80,8 +73,7 @@ const Pricing = () => {
     try {
       setLoading(plan.id);
 
-      const amount =
-        plan.id === "basic" ? 100 : plan.id === "pro" ? 500 : 0;
+      const amount = plan.id === "basic" ? 100 : plan.id === "pro" ? 500 : 0;
 
       const result = await axios.post(
         `${ServerUrl}/api/payment/order`,
@@ -92,7 +84,7 @@ const Pricing = () => {
         },
         {
           withCredentials: true,
-        }
+        },
       );
 
       const options = {
@@ -111,18 +103,15 @@ const Pricing = () => {
             const verify = await axios.post(
               `${ServerUrl}/api/payment/verify`,
               {
-                razorpay_order_id:
-                  response.razorpay_order_id,
+                razorpay_order_id: response.razorpay_order_id,
 
-                razorpay_payment_id:
-                  response.razorpay_payment_id,
+                razorpay_payment_id: response.razorpay_payment_id,
 
-                razorpay_signature:
-                  response.razorpay_signature,
+                razorpay_signature: response.razorpay_signature,
               },
               {
                 withCredentials: true,
-              }
+              },
             );
 
             toast.success(verify.data.message);
@@ -146,10 +135,7 @@ const Pricing = () => {
         toast.error("Payment Failed");
       });
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message ||
-          "Something went wrong"
-      );
+      toast.error(error?.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(null);
     }
@@ -157,7 +143,6 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-[#f5f7fb] px-6 py-16 overflow-hidden">
-
       {/* Top Blur Background */}
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-emerald-200 rounded-full blur-3xl opacity-30"></div>
 
@@ -165,29 +150,27 @@ const Pricing = () => {
 
       {/* Header */}
       <div className="max-w-7xl mx-auto flex items-start gap-4 mb-16 relative z-10">
-
         <button
           onClick={() => navigate("/")}
-          className="p-3 rounded-2xl bg-white shadow-lg border border-gray-200 hover:scale-105 transition cursor-pointer"
+          className="p-1 sm:p-3 -mt-[30px] rounded-2xl bg-white shadow-lg border border-gray-200 hover:scale-105 transition cursor-pointer"
         >
           <FaArrowLeft className="text-gray-700" />
         </button>
 
         <div className="w-full text-center">
-          <h1 className="text-5xl font-extrabold text-gray-800">
+          <h1 className="text-5xl font-extrabold text-gray-800 whitespace-nowrap">
             Pricing Plans
           </h1>
 
           <p className="text-gray-500 mt-4 text-lg max-w-2xl mx-auto">
-            Choose the perfect plan and unlock premium AI
-            interview preparation tools.
+            Choose the perfect plan and unlock premium AI interview preparation
+            tools.
           </p>
         </div>
       </div>
 
       {/* Pricing Cards */}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 max-w-7xl mx-auto relative z-10">
-
         {plans.map((plan, index) => {
           const isSelected = selectedPlan === plan.id;
 
@@ -197,29 +180,18 @@ const Pricing = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.15 }}
-
               whileHover={{
                 y: -10,
                 scale: 1.03,
               }}
-
-              onClick={() =>
-                !plan.disabled && setSelectedPlan(plan.id)
-              }
-
+              onClick={() => !plan.disabled && setSelectedPlan(plan.id)}
               className={`relative rounded-[32px] p-[1px] transition-all duration-500
               
-              ${
-                isSelected
-                  ? `bg-gradient-to-br ${plan.color}`
-                  : "bg-gray-200"
-              }
+              ${isSelected ? `bg-gradient-to-br ${plan.color}` : "bg-gray-200"}
               `}
             >
-
               {/* Inner Card */}
               <div className="bg-white rounded-[32px] p-8 h-full shadow-xl">
-
                 {/* Badge */}
                 {plan.badge && (
                   <div className="absolute top-5 right-5 bg-gradient-to-r from-orange-400 to-pink-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow">
@@ -245,9 +217,7 @@ const Pricing = () => {
                     {plan.price}
                   </span>
 
-                  <p className="text-gray-500 mt-2">
-                    {plan.credits} Credits
-                  </p>
+                  <p className="text-gray-500 mt-2">{plan.credits} Credits</p>
                 </div>
 
                 {/* Description */}
@@ -258,15 +228,10 @@ const Pricing = () => {
                 {/* Features */}
                 <div className="mt-8 space-y-4">
                   {plan.features.map((feature, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3"
-                    >
+                    <div key={i} className="flex items-center gap-3">
                       <FaCheckCircle className="text-emerald-500" />
 
-                      <span className="text-gray-700">
-                        {feature}
-                      </span>
+                      <span className="text-gray-700">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -290,9 +255,7 @@ const Pricing = () => {
                   }
                   `}
                 >
-                  {loading === plan.id
-                    ? "Processing..."
-                    : plan.button}
+                  {loading === plan.id ? "Processing..." : plan.button}
                 </button>
               </div>
             </motion.div>

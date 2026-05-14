@@ -18,25 +18,23 @@ import autoTable from "jspdf-autotable";
 const Step3 = ({ report }) => {
   const navigate = useNavigate();
   if (!report) {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100">
-  <div className="flex flex-col items-center gap-5 rounded-2xl bg-white/70 backdrop-blur-md px-8 py-10 shadow-xl border border-slate-200">
-    
-    <div className="h-12 w-12 animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-500"></div>
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100">
+        <div className="flex flex-col items-center gap-5 rounded-2xl bg-white/70 backdrop-blur-md px-8 py-10 shadow-xl border border-slate-200">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-500"></div>
 
-    <div className="text-center">
-      <p className="text-lg font-semibold text-slate-700 animate-pulse">
-        Loading Report...
-      </p>
-      <p className="text-sm text-slate-500 mt-1">
-        Please wait while we prepare your data
-      </p>
-    </div>
-
-  </div>
-</div>
-  );
-}
+          <div className="text-center">
+            <p className="text-lg font-semibold text-slate-700 animate-pulse">
+              Loading Report...
+            </p>
+            <p className="text-sm text-slate-500 mt-1">
+              Please wait while we prepare your data
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
   const {
     finalScore = 0,
     confidence = 0,
@@ -315,13 +313,13 @@ const Step3 = ({ report }) => {
         <div className="flex items-center gap-5">
           <button
             onClick={() => navigate("/history")}
-            className="group bg-white border border-gray-200 p-4 rounded-2xl hover:bg-emerald-50 transition-all duration-300 shadow-lg cursor-pointer"
+            className="group bg-white border border-gray-200 p-2 sm:p-4 rounded-2xl hover:bg-emerald-50 transition-all duration-300 shadow-lg ml-[5px] -mt-[90px] sm:-mt-[30px] cursor-pointer"
           >
             <FaArrowLeft className="text-gray-700 group-hover:text-emerald-600 group-hover:-translate-x-1 transition-all duration-300 " />
           </button>
 
-          <div>
-            <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
+          <div className="-ml-[10px]">
+            <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900 whitespace-nowrap">
               Interview{" "}
               <span className="bg-gradient-to-r from-emerald-500 to-green-400 bg-clip-text text-transparent">
                 Analytics
@@ -336,7 +334,7 @@ const Step3 = ({ report }) => {
 
         <button
           onClick={downloadPDF}
-          className="bg-gradient-to-r from-emerald-500 to-green-400 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl shadow-emerald-200 px-6 py-4 rounded-2xl font-semibold text-white cursor-pointer"
+          className="bg-gradient-to-r from-emerald-500 to-green-400 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl shadow-emerald-200 px-6 py-4 rounded-3xl font-semibold text-white cursor-pointer"
         >
           Download Report
         </button>

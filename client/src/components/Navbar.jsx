@@ -115,56 +115,65 @@ const Navbar = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="group absolute right-0 top-full mt-4 w-[360px] rounded-[32px] border border-white/30  bg-white/80 backdrop-blur-2xl shadow-[0_25px_80px_-20px_rgba(15,23,42,0.22)] hover:shadow- transition-all duration-500 p-7 z-50 origin-top-right overflow-hidden "
+                  className="group absolute top-full mt-4 w-[95vw] sm:w-[360px] max-w-[360px] left-1/2 sm:left-auto -translate-x-[63%] sm:translate-x-5 right-auto sm:right-0 rounded-[24px] sm:rounded-[32px] border border-white/30 bg-white/80 backdrop-blur-2xl shadow-[0_25px_80px_-20px_rgba(15,23,42,0.22)] transition-all duration-500 p-4 sm:p-7 z-50 origin-top-right overflow-hidden"
                 >
                   {/* Border Glow */}
-                  <div className="absolute inset-0 rounded-[32px] ring-1 ring-inset ring-white/40 pointer-events-none" />
+                  <div className="absolute inset-0 rounded-[24px] sm:rounded-[32px] ring-1 ring-inset ring-white/40 pointer-events-none" />
 
                   {/* Ambient Glows */}
-                  <div className="absolute -top-28 -right-20 w-56 h-56 bg-indigo-200/40 rounded-full blur-3xl" />
-                  <div className="absolute -bottom-28 -left-20 w-56 h-56 bg-fuchsia-200/30 rounded-full blur-3xl" />
+                  <div className="absolute -top-28 -right-20 w-40 sm:w-56 h-40 sm:h-56 bg-indigo-200/40 rounded-full blur-3xl" />
+
+                  <div className="absolute -bottom-28 -left-20 w-40 sm:w-56 h-40 sm:h-56 bg-fuchsia-200/30 rounded-full blur-3xl" />
+
+                  {/* Top Gradient Line */}
                   <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500" />
 
                   <div className="relative">
-                    <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/75 border border-slate-200/80 shadow-sm">
+                    {/* Credits Badge */}
+                    <div className="inline-flex items-center gap-3 px-3 sm:px-4 py-2 rounded-full bg-white/75 border border-slate-200/80 shadow-sm">
                       <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100">
                         <BsCoin className="text-emerald-500" size={16} />
                       </div>
 
                       <div className="flex flex-col leading-none">
-                        <span className="text-[10px] uppercase tracking-[0.22em] font-semibold text-slate-400">
+                        <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.22em] font-semibold text-slate-400">
                           Credits
                         </span>
 
-                        <span className="text-sm font-bold text-slate-800">
+                        <span className="text-xs sm:text-sm font-bold text-slate-800">
                           {userData?.credits || 0} remaining
                         </span>
                       </div>
 
                       <div className="ml-1 w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     </div>
-                    <div className="mt-2">
-                      <h3 className="text-[24px] leading-[1.15] tracking-tight font-bold text-slate-900">
+
+                    {/* Heading */}
+                    <div className="mt-3">
+                      <h3 className="text-[20px] sm:text-[24px] leading-[1.2] tracking-tight font-bold text-slate-900">
                         Continue your{" "}
                         <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
                           AI interview preparation
                         </span>
                       </h3>
-                      <p className="mt-4 text-[15px] leading-7 text-slate-600">
+
+                      <p className="mt-4 text-[13px] sm:text-[15px] leading-6 sm:leading-7 text-slate-600">
                         Unlock more{" "}
                         <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 bg-clip-text text-transparent font-bold">
-                          {" "}
-                          sessions, deeper feedback, and uninterrupted{" "}
-                        </span>
+                          sessions, deeper feedback, and uninterrupted
+                        </span>{" "}
                         practice whenever you need it.
                       </p>
                     </div>
-                    <div className="mt-4">
+
+                    {/* Progress */}
+                    <div className="mt-5">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-medium text-slate-500">
+                        <span className="text-[11px] sm:text-xs font-medium text-slate-500">
                           Remaining credits
                         </span>
-                        <span className="text-xs font-semibold text-slate-700">
+
+                        <span className="text-[11px] sm:text-xs font-semibold text-slate-700">
                           {userData?.credits || 0}/100
                         </span>
                       </div>
@@ -179,23 +188,24 @@ const Navbar = () => {
                             duration: 0.9,
                             ease: [0.22, 1, 0.36, 1],
                           }}
-                          className={`h-full rounded-full transition-all duration-100 
-                            ${
-                              (userData?.credits || 0) < 100
-                                ? "bg-gradient-to-r from-rose-500 via-orange-400 to-amber-400"
-                                : "bg-gradient-to-r from-emerald-500 via-indigo-500 to-violet-500"
-                            } 
-                              `}
+                          className={`h-full rounded-full transition-all duration-100 ${
+                            (userData?.credits || 0) < 100
+                              ? "bg-gradient-to-r from-rose-500 via-orange-400 to-amber-400"
+                              : "bg-gradient-to-r from-emerald-500 via-indigo-500 to-violet-500"
+                          }`}
                         />
                       </div>
                     </div>
+
+                    {/* Primary Button */}
                     <button
                       onClick={() => navigate("/pricing")}
-                      className="group/button relative mt-5 w-full overflow-hidden bg-slate-900 py-4 font-semibold text-white transition-all duration-300 hover:scale-[1.015] hover:-translate-y-[1px] hover:shadow-[0_20px_45px_rgba(79,70,229,0.35)] active:scale-[0.985] rounded-3xl cursor-pointer"
+                      className="group/button relative mt-5 w-full overflow-hidden bg-slate-900 py-3 sm:py-4  text-sm sm:text-base font-semibold text-white transition-all duration-300 hover:scale-[1.015] hover:-translate-y-[1px] hover:shadow-[0_20px_45px_rgba(79,70,229,0.35)] active:scale-[0.985] rounded-2xl sm:rounded-3xl cursor-pointer "
                     >
+                      {/* Hover Gradient */}
                       <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/button:opacity-100 bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600" />
 
-                      {/* Shine */}
+                      {/* Shine Effect */}
                       <div className="absolute inset-0 -translate-x-full group-hover/button:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
 
                       <span className="relative z-10 flex items-center justify-center gap-2">
@@ -203,10 +213,10 @@ const Navbar = () => {
                       </span>
                     </button>
 
-                    {/* Secondary Action */}
+                    {/* Secondary Button */}
                     <button
                       onClick={() => setShowCreditPopup(false)}
-                      className="mt-4 w-full text-sm text-slate-400 hover:text-slate-600 transition-colors cursor-pointer underline font-bold "
+                      className=" mt-4 w-full text-xs sm:text-sm text-slate-400 hover:text-slate-600 transition-colors cursor-pointer underline font-bold "
                     >
                       Maybe later
                     </button>

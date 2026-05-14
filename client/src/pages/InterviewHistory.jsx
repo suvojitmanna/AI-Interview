@@ -176,16 +176,16 @@ const InterviewHistory = () => {
         >
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             {/* Left */}
-            <div className="flex items-center gap-5">
+            <div className="flex items-center sm:gap-5">
               <button
                 onClick={() => navigate("/")}
-                className="group p-4 rounded-2xl bg-white border border-gray-200 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all duration-300 shadow-sm cursor-pointer"
+                className="group p-1 sm:p-4 rounded-2xl bg-white border border-gray-200 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all duration-300 shadow-sm cursor-pointer -ml-[10px] -mt-[100px] sm:-mt-[30px] "
               >
                 <FaArrowLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
               </button>
 
               <div>
-                <h1 className="text-4xl font-black tracking-tight text-gray-900">
+                <h1 className="text-4xl font-black tracking-tight text-gray-900 pt-4">
                   Interview <span className="text-emerald-600">History</span>
                 </h1>
 
