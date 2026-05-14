@@ -175,7 +175,8 @@ sequenceDiagram
 
 <p align="center">
 
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExplaceholder/giphy.gif" width="850"/>
+![Uploading Screenshot 2026-05-09 235327.png…]()
+
 
 </p>
 
