@@ -14,9 +14,12 @@ import {
 } from "recharts";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useSelector } from "react-redux";
 
 const Step3 = ({ report }) => {
   const navigate = useNavigate();
+  const { userData } = useSelector((state) => state.user);
+
   if (!report) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100">
@@ -47,8 +50,6 @@ const Step3 = ({ report }) => {
     name: `Q${index + 1}`,
     score: q.score || 0,
   }));
-  console.log(questionWiseScore);
-  console.log(questionWiseScoreData);
   const skills = [
     { label: "Confidence", value: confidence },
     { label: "Communication", value: communication },
@@ -74,47 +75,62 @@ const Step3 = ({ report }) => {
 
   const downloadPDF = () => {
     const doc = new jsPDF("p", "mm", "a4");
+
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
+
     const margin = 18;
     const contentWidth = pageWidth - margin * 2;
 
     let currentY = 25;
 
-    // Background Header
+    // =========== LIGHT PREMIUM BACKGROUND ===========
+    doc.setFillColor(248, 250, 252);
+    doc.rect(0, 0, pageWidth, pageHeight, "F");
 
+    // =========== PREMIUM TOP HEADER ===========
     doc.setFillColor(16, 185, 129);
-    doc.rect(0, 0, pageWidth, 55, "F");
-    doc.setFillColor(52, 211, 153);
-    doc.circle(pageWidth - 25, 15, 18, "F");
+    doc.rect(0, 0, pageWidth, 60, "F");
 
-    // Title
+    // Decorative Circle
+    doc.setFillColor(52, 211, 153);
+    doc.circle(pageWidth - 18, 12, 20, "F");
+    doc.setFillColor(110, 231, 183);
+    doc.circle(pageWidth - 32, 18, 8, "F");
+
+    // =========== TITLE ===========
+
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(24);
+    doc.setFontSize(28);
     doc.setTextColor(255, 255, 255);
-    doc.text("AI Interview Report", margin, 22);
+    doc.text("AI Interview Report", margin, 23);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(11);
     doc.text("Premium AI-powered interview performance analytics", margin, 32);
 
-    // Date
+    // ========== USER DETAILS ===========
+
     const today = new Date().toLocaleDateString();
     doc.setFontSize(10);
     doc.text(`Generated: ${today}`, margin, 42);
+    doc.text(`Candidate: ${userData?.name || "Anonymous User"}`, margin, 49);
+    currentY = 75;
 
-    currentY = 70;
+    // ========== OVERALL SCORE CARD ===========
 
-    // Score Card
     doc.setFillColor(255, 255, 255);
-    doc.roundedRect(margin, currentY, contentWidth, 35, 6, 6, "F");
-    doc.setDrawColor(230, 230, 230);
-    doc.roundedRect(margin, currentY, contentWidth, 35, 6, 6);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(13);
-    doc.setTextColor(100);
-    doc.text("Overall Interview Score", margin + 10, currentY + 12);
-    doc.setFontSize(28);
+    doc.roundedRect(margin, currentY, contentWidth, 44, 8, 8, "F");
+    doc.setDrawColor(230);
+    doc.roundedRect(margin, currentY, contentWidth, 44, 8, 8);
 
+    // Left Title
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(15);
+    doc.setTextColor(55);
+    doc.text("Overall Interview Score", margin + 12, currentY + 15);
+
+    // Score
+    doc.setFontSize(34);
     if (finalScore >= 8) {
       doc.setTextColor(16, 185, 129);
     } else if (finalScore >= 5) {
@@ -122,17 +138,12 @@ const Step3 = ({ report }) => {
     } else {
       doc.setTextColor(239, 68, 68);
     }
-
-    doc.text(`${finalScore}/10`, pageWidth - margin - 10, currentY + 20, {
+    doc.text(`${finalScore}/10`, pageWidth - margin - 12, currentY + 26, {
       align: "right",
     });
 
-    // Tagline
-    doc.setFontSize(10);
-    doc.setTextColor(120);
-
+    // Tag
     let performanceTag = "";
-
     if (finalScore >= 8) {
       performanceTag = "Excellent Performance";
     } else if (finalScore >= 5) {
@@ -140,14 +151,14 @@ const Step3 = ({ report }) => {
     } else {
       performanceTag = "Needs Improvement";
     }
-
-    doc.text(performanceTag, pageWidth - margin - 10, currentY + 28, {
+    doc.setFontSize(11);
+    doc.setTextColor(120);
+    doc.text(performanceTag, pageWidth - margin - 12, currentY + 36, {
       align: "right",
     });
+    currentY += 58;
 
-    currentY += 50;
-
-    // Skill Cards
+    // ============ SKILL CARDS ===========
     const cardWidth = 52;
     const gap = 8;
     const skillData = [
@@ -167,75 +178,109 @@ const Step3 = ({ report }) => {
         color: [245, 158, 11],
       },
     ];
-
     skillData.forEach((skill, index) => {
       const x = margin + index * (cardWidth + gap);
+
+      // Card
       doc.setFillColor(255, 255, 255);
-      doc.roundedRect(x, currentY, cardWidth, 40, 5, 5, "F");
+      doc.roundedRect(x, currentY, cardWidth, 44, 8, 8, "F");
       doc.setDrawColor(235);
-      doc.roundedRect(x, currentY, cardWidth, 40, 5, 5);
+      doc.roundedRect(x, currentY, cardWidth, 44, 8, 8);
 
       // Top Bar
       doc.setFillColor(...skill.color);
-      doc.roundedRect(x, currentY, cardWidth, 5, 5, 5, "F");
+      doc.roundedRect(x, currentY, cardWidth, 5, 8, 8, "F");
+
+      // Label
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
-      doc.setTextColor(60);
-      doc.text(skill.label, x + 5, currentY + 16);
-      doc.setFontSize(22);
+      doc.setTextColor(70);
+      doc.text(skill.label, x + 6, currentY + 18);
+
+      // Value
+      doc.setFontSize(24);
       doc.setTextColor(...skill.color);
-      doc.text(`${skill.value}`, x + 5, currentY + 30);
+      doc.text(`${skill.value}`, x + 6, currentY + 34);
     });
 
-    currentY += 55;
+    currentY += 65;
 
-    // Professional Advice
+    // ============ PROFESSIONAL FEEDBACK ===========
+
     let advice = "";
     if (finalScore >= 8) {
       advice =
-        "Excellent performance. You demonstrated strong communication, clarity, and structured thinking. Continue refining advanced problem-solving and provide more real-world examples for senior-level interviews.";
+        "Excellent performance. Strong communication, structured thinking, and technical clarity were demonstrated consistently throughout the interview.";
     } else if (finalScore >= 5) {
       advice =
-        "Good foundation shown. Focus on improving answer structure, communication clarity, and confidence while explaining technical concepts.";
+        "Good foundation shown. Improve confidence, answer structure, and communication clarity to reach the next level.";
     } else {
       advice =
-        "Significant improvement required. Practice mock interviews regularly and focus on confidence, structured thinking, and concise communication.";
+        "More practice is required. Focus on mock interviews, concise communication, and improving technical confidence.";
     }
 
     // Title
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(18);
-    doc.setTextColor(17, 24, 39);
+    doc.setFontSize(19);
+    doc.setTextColor(15, 23, 42);
     doc.text("Professional Feedback", margin, currentY);
-    currentY += 10;
+    currentY += 12;
 
     // Advice Box
-    doc.setFillColor(248, 250, 252);
-    doc.roundedRect(margin, currentY, contentWidth, 42, 5, 5, "F");
-    doc.setDrawColor(230);
-    doc.roundedRect(margin, currentY, contentWidth, 42, 5, 5);
+    doc.setFillColor(255, 255, 255);
+    doc.roundedRect(margin, currentY, contentWidth, 50, 8, 8, "F");
+    doc.setDrawColor(235);
+    doc.roundedRect(margin, currentY, contentWidth, 50, 8, 8);
+
+    // Advice Text
     doc.setFont("helvetica", "normal");
     doc.setFontSize(11);
-    doc.setTextColor(75);
+    doc.setTextColor(80);
     const splitAdvice = doc.splitTextToSize(advice, contentWidth - 20);
-    doc.text(splitAdvice, margin + 10, currentY + 12);
+    doc.text(splitAdvice, margin + 10, currentY + 15);
 
-    currentY += 60;
+    // ============= NEXT PAGE ===========
 
-    // Question Section
+    doc.addPage();
+
+    // Light Background
+    doc.setFillColor(248, 250, 252);
+    doc.rect(0, 0, pageWidth, pageHeight, "F");
+
+    // Top Banner
+    doc.setFillColor(16, 185, 129);
+    doc.rect(0, 0, pageWidth, 42, "F");
+
+    // Decorative Circle
+    doc.setFillColor(52, 211, 153);
+    doc.circle(pageWidth - 18, 10, 16, "F");
+
+    // Heading
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(18);
-    doc.setTextColor(16, 185, 129);
-    doc.text("Question Breakdown", margin, currentY);
+    doc.setFontSize(24);
+    doc.setTextColor(255, 255, 255);
+    doc.text("Question Breakdown", margin, 24);
 
-    currentY += 10;
+    // Subtitle
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text("Detailed AI evaluation for every interview answer", margin, 32);
 
-    // Premium Table
+    currentY = 55;
+
+    // White Table Container
+    doc.setFillColor(255, 255, 255);
+    doc.roundedRect(margin, currentY - 10, contentWidth, 210, 8, 8, "F");
+    doc.setDrawColor(235);
+    doc.roundedRect(margin, currentY - 10, contentWidth, 210, 8, 8);
+
+    // ================== PREMIUM TABLE ===========
+
     autoTable(doc, {
       startY: currentY,
       margin: {
-        left: margin,
-        right: margin,
+        left: margin + 4,
+        right: margin + 4,
       },
       head: [["#", "Question", "Score", "AI Feedback"]],
       body: questionWiseScore.map((q, i) => [
@@ -249,7 +294,7 @@ const Step3 = ({ report }) => {
         fontSize: 9,
         cellPadding: 5,
         valign: "middle",
-        lineColor: [240, 240, 240],
+        lineColor: [235, 235, 235],
         lineWidth: 0.5,
       },
       headStyles: {
@@ -261,9 +306,10 @@ const Step3 = ({ report }) => {
       },
       bodyStyles: {
         textColor: 60,
+        fillColor: [255, 255, 255],
       },
       alternateRowStyles: {
-        fillColor: [249, 250, 251],
+        fillColor: [248, 250, 252],
       },
       columnStyles: {
         0: {
@@ -271,7 +317,7 @@ const Step3 = ({ report }) => {
           halign: "center",
         },
         1: {
-          cellWidth: 58,
+          cellWidth: 60,
         },
         2: {
           cellWidth: 22,
@@ -282,15 +328,15 @@ const Step3 = ({ report }) => {
         },
       },
     });
+    // =============== FOOTER ===========
 
-    // Footer
-    const finalY = doc.lastAutoTable.finalY || currentY;
-    doc.setDrawColor(230);
+    const finalY = doc.lastAutoTable.finalY;
+    doc.setDrawColor(220);
     doc.line(margin, finalY + 15, pageWidth - margin, finalY + 15);
     doc.setFontSize(10);
     doc.setTextColor(120);
     doc.text(
-      "Generated by AI Interview Analytics Platform",
+      "Generated by Premium AI Interview Analytics Platform",
       pageWidth / 2,
       finalY + 24,
       {
@@ -298,8 +344,9 @@ const Step3 = ({ report }) => {
       },
     );
 
-    // Save
-    doc.save("AI_Interview_Report.pdf");
+    // ============SAVE ===========
+
+    doc.save(`${userData?.name || "Candidate"}_Interview_Report.pdf`);
   };
 
   return (

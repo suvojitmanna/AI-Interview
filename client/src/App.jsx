@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
@@ -14,8 +14,16 @@ import InterviewReport from "./pages/InterviewReport";
 
 export const ServerUrl = import.meta.env.VITE_BASE_URL;
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, loading }) => {
   const userData = useSelector((state) => state.user.userData);
+
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center text-xl font-semibold">
+        Loading...
+      </div>
+    );
+  }
 
   if (!userData) {
     return <Navigate to="/" replace />;
@@ -26,6 +34,7 @@ const ProtectedRoute = ({ children }) => {
 
 const App = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getUser = async () => {
@@ -38,34 +47,32 @@ const App = () => {
       } catch (error) {
         console.log(error);
         dispatch(setUserData(null));
+      } finally {
+        setLoading(false);
       }
     };
-
     getUser();
   }, [dispatch]);
 
   return (
     <Routes>
-      {/* Public Routes */}
       <Route path="/" element={<Home />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
-
-      {/* Protected Routes */}
       <Route
         path="/interview"
         element={
-          <ProtectedRoute>
-            <InterviewPage />
+          <ProtectedRoute loading={loading}>
+            {" "}
+            <InterviewPage />{" "}
           </ProtectedRoute>
         }
       />
-
       <Route
         path="/history"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute loading={loading}>
             {" "}
             <InterviewHistory />{" "}
           </ProtectedRoute>
@@ -75,8 +82,8 @@ const App = () => {
       <Route
         path="/pricing"
         element={
-          <ProtectedRoute>
-            <Pricing />{" "}
+          <ProtectedRoute loading={loading}>
+            <Pricing />
           </ProtectedRoute>
         }
       />
@@ -84,7 +91,7 @@ const App = () => {
       <Route
         path="/report/:id"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute loading={loading}>
             <InterviewReport />
           </ProtectedRoute>
         }
